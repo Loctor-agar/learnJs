@@ -1,21 +1,33 @@
-let money = 20000;
-let income = 'Фриланс';
-let addExpenses = '"Такси","Еда","Комуналка"';
-let deposit = true;
-let mission = 100000;
-let period = 4;
-let budgetDay = money;
+'use strict'
+let money = +prompt("Ваш месячный доход?", ""),
+    income = 'Фриланс',
+    addExpenses = prompt("Перечислите возможные расходы за рассчитываемый период через запятую", ""),
+    deposit = confirm("Есть ли у вас депозит в банке?"),
+    mission = 100000,
+    period = 4,
+    expenses1 = prompt("Введите обязательную статью расходов?"),
+    amount1 = +prompt("Во сколько это обойдется?"),
+    expenses2 = prompt("Введите обязательную статью расходов?"),
+    amount2 = +prompt("Во сколько это обойдется?"),
+    budgetMonth = money - (amount1 + amount2),
+    budgetDay = budgetMonth / 30;
 
-// - Вывести в консоль тип данных значений переменных money, income, deposit;
+    
 console.log(typeof money);
 console.log(typeof income);
 console.log(typeof deposit);
-//  - Вывести в консоль длину строки addExpenses
-console.log(addExpenses.length);
-//  - Вывести в консоль “Период равен (period) месяцев” и “Цель заработать (mission) рублей/долларов/гривен/юани”
+console.log(addExpenses.toLowerCase() , addExpenses.split(', '));
 console.log(`Период равен ${period} месяцев`  , `Цель заработать ${mission} рублей`);
-// - Привести строку addExpenses к нижнему регистру и разбить строку на массив, вывести массив в консоль
-console.log(addExpenses.toLocaleLowerCase().split(" "))
-//    - Объявить переменную budgetDay и присвоить дневной бюджет (доход за месяц / 30)
-console.log(budgetDay / 30)
-//  - Вывести в консоль budgetDay
+console.log("Бюджет " + budgetMonth + " за месяц");
+console.log('Цель будет достигнута за ' + Math.ceil(mission / budgetMonth) + "  месяцев(ца)");
+console.log('Цель за день ' + Math.floor(budgetDay) + ' рублей');
+
+if (budgetDay >= 1200) {
+  console.log('У вас высокий уровень дохода')
+} else if (budgetDay >= 600 && budgetDay <= 1200){
+  console.log('У вас средний уровень дохода')
+} else if (budgetDay <=600 && budgetDay >= 0){
+  console.log('К сожалению у вас уровень дохода ниже среднего')
+} else if (budgetDay < 0){
+  console.log('Что то пошло не так')
+}
